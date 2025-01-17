@@ -9,18 +9,23 @@ namespace Bank
     internal class Account
     {
         public bool haveAccount = false;
-        public string AccountHolder;
-        private string Password;
+        public string accountHolder = null;
+        private string password = null;
 
-        public void TakePassword (string password) { 
-            if (string.IsNullOrEmpty(password))
+        public void TakePassword (string pw) { 
+            if (string.IsNullOrEmpty(pw))
             {
                 Console.Clear();
                 Console.WriteLine("Please enter a valid password.");
             } else
             {
-                Password = password;
+                password = pw;
             }
+        }
+
+        public string MakeAccount() 
+        {
+            return "You have made an account.";
         }
     }
 }
