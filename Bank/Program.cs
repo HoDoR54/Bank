@@ -2,7 +2,7 @@
 using System.Threading;
 using Bank;
 
-internal class Program
+public class Program
 {
     private static void Main(string[] args)
     {
@@ -21,14 +21,13 @@ internal class Program
                     if (chosenNum == $"{i}")
                     {
                         Util.setTypingEffect($"Can you please confirm that you are here to {options[i - 1].ToLower()}?");
-                        Util.YesOrNo(text => Util.setTypingEffect(text));
+                        Util.YesOrNo(text => Util.setTypingEffect(text), "LOL");
                     }
                 }
             }
             else
             {
-                Util.setTypingEffect("You are required to make an account first. Would you like to?");
-                Util.YesOrNo(text => account.MakeAccount());
+                Account.promptSignUp();
             }
         }
 

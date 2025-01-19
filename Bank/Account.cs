@@ -9,7 +9,7 @@ using Bank;
 
 namespace Bank
 {
-    internal class Account
+    public class Account
     {
         public bool haveAccount = false;
         public string accountHolder;
@@ -17,15 +17,12 @@ namespace Bank
         private string password;
         private char gender;
 
-        public void TakePassword (string pw) { 
-            if (string.IsNullOrEmpty(pw))
-            {
-                Console.Clear();
-                Console.WriteLine("Please enter a valid password.");
-            } else
-            {
-                password = pw;
-            }
+        public static void promptSignUp ()
+        {
+            Account account = new Account ();
+            Util.setTypingEffect("You are required to make an account first. would you like to?");
+            Util.setTypingEffect("\nResponse: ");
+            Util.YesOrNo((text) => account.MakeAccount(), "");
         }
 
         public string validatePassword (string pw)

@@ -9,7 +9,7 @@ using Bank;
 
 namespace Bank
 {
-    internal class Service
+    public class Service
     {
         public static string PromptAndTakeOption(string[] options)
         {

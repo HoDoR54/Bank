@@ -7,7 +7,7 @@ using Bank;
 
 namespace Bank
 {
-    internal class Util
+    public class Util
     {
         public static void setTypingEffect(string text)
         {
@@ -44,7 +44,7 @@ namespace Bank
         }
 
 
-        public static void YesOrNo(Action<string> yesFunction)
+        public static void YesOrNo(Action<string> yesFunction, string param)
         {
             Util.setTypingEffect("\n1) Yes\n2) No");
 
@@ -58,11 +58,29 @@ namespace Bank
                 if (chosenNum == "2")
                 {
                     Util.setTypingEffect("Okay, let us know if you need anything else.");
-                    Service.PromptAndTakeOption(["Deposit funds", "Transfer funds", "Withdraw funds", "Apply for a loan", "Apply for a credit card"]);
+                    string[] options = { "Deposit funds", "Transfer funds", "Withdraw funds", "Apply for a loan", "Apply for a credit card" };
+                    string chosen = Service.PromptAndTakeOption(options);
+                    Account account = new Account();
+                    if (account.haveAccount)
+                    {
+                        isValid = ValidateOption(chosen, options.Length);
+                        for (int i = 1; i <= options.Length; i++)
+                        {
+                            if (chosen == $"{i}")
+                            {
+                                Util.setTypingEffect($"Can you please confirm that you are here to {options[i - 1].ToLower()}?");
+                                Util.YesOrNo(text => Util.setTypingEffect(text), "LOL");
+                            }
+                        }
+                    } 
+                    else
+                    {
+                        Account.promptSignUp();
+                    }
                 }
                 else
                 {
-                    yesFunction("Sorry, I haven't dealt with the 'yes' part yet.");
+                    yesFunction(param);
                 }
             }
         }
